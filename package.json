@@ -1,0 +1,30 @@
+{
+  "name": "studing-projects",
+  "version": "0.0.0",
+  "description": "Just project for studing",
+  "main": "server.js",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
+    "koa": "^1.1.1",
+    "mongoose": "^4.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tsenzuk/StudingProjects.git"
+  },
+  "keywords": [
+    "crud"
+  ],
+  "author": "tsenzuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tsenzuk/StudingProjects/issues"
+  },
+  "homepage": "https://github.com/Tsenzuk/StudingProjects#readme"
+}
