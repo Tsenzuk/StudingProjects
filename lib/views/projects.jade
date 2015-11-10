@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-md-12
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Projects
+                    table.table.table-bordered.table-hover
+                        thead
+                            tr
+                                th #
+                                th Actions
+                                th Title
+                                th Description
+                                th Start Date
+                                th Finish Date
+                                th Status
+                        tbody
+                            for project, index in projects
+                                tr
+                                    td= index
+                                    td
+                                        a.btn.btn-default(href="/projects/"+project.id + "/")
+                                            i.glyphicon.glyphicon-share
+                                            |  View
+                                        |  
+                                        a.btn.btn-default(href="/projects/"+project.id+"/edit")
+                                            i.glyphicon.glyphicon-pencil
+                                            |  Edit
+                                        |  
+                                        button.btn.btn-danger
+                                            i.glyphicon.glyphicon-trash
+                                            |  Remove
+                                    td= project.title
+                                    td= project.description
+                                    td= project.dateStart.toLocaleDateString()
+                                    td= project.dateFinish.toLocaleDateString()
+                                    td= project.status
