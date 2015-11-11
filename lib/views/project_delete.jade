@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-md-12
+                form.panel.panel-default(method="POST",action="./")
+                    .panel-heading
+                        h3.panel-title="Are want to delete Project " + projects[0].title + ". Are you sure?"
+                    .panel-footer
+                        a.btn.btn-default(href="/projects/")
+                            i.glyphicon.glyphicon-chevron-left
+                            |  Projects
+                        |  
+                        a.btn.btn-default(href="../edit/")
+                            i.glyphicon.glyphicon-pencil
+                            |  Edit
+                        |  
+                        button.btn.btn-danger(type="submit")
+                            i.glyphicon.glyphicon-trash
+                            |  Delete
