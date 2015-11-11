@@ -22,17 +22,17 @@ block content
                                 tr
                                     td= index
                                     td
-                                        a.btn.btn-default(href="/projects/"+project.id + "/")
+                                        a.btn.btn-default(href="/projects/" + project.id + "/")
                                             i.glyphicon.glyphicon-share
                                             |  View
                                         |  
-                                        a.btn.btn-default(href="/projects/"+project.id+"/edit")
+                                        a.btn.btn-default(href="/projects/" + project.id + "/edit/")
                                             i.glyphicon.glyphicon-pencil
                                             |  Edit
                                         |  
-                                        button.btn.btn-danger
+                                        a.btn.btn-danger(href="/projects/" + project.id + "/delete/")
                                             i.glyphicon.glyphicon-trash
-                                            |  Remove
+                                            |  Delete
                                     td= project.title
                                     td= project.description
                                     td= project.dateStart.toLocaleDateString()

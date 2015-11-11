@@ -25,7 +25,18 @@ block content
                                 label.col-md-3 Finish Date
                                 .col-md-9
                                     p= project.dateFinish.toISOString().split("T")[0]
+                            .form-group
+                                label.col-md-3 Status
+                                .col-md-9
+                                    p= project.status
                     .panel-footer
-                        a.btn.btn-default(href="./edit")
+                        a.btn.btn-default(href="/projects/")
+                            i.glyphicon.glyphicon-chevron-left
+                            |  Back to projects
+                        |  
+                        a.btn.btn-default(href="./edit/")
                             i.glyphicon.glyphicon-pencil
                             |  Edit
+                        a.btn.btn-danger.pull-right(href="./delete/")
+                            i.glyphicon.glyphicon-trash
+                            |  Delete
