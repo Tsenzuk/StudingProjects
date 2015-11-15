@@ -1,6 +1,29 @@
 extends layout
 
 block content
+    script.
+        jQuery(function($){
+            $("#modal-delete").on("show.bs.modal",function(event){
+                var $this = $(this);
+                var $button = $(event.relatedTarget);
+                $this.find(".project-name").text($button.data().title);
+                $this.find(".remove-button").attr("href", "/projects/"+$button.data().id+"/delete")
+            }).find(".remove-button").click(function(){
+                var $this = $(this);
+                $.ajax({
+                    method:"post",
+                    url:$this.attr("href")
+                }).always(function(){
+                    window.location.reload();
+                });
+            });
+            $(".delete").click(function(e){
+                var $this = $(this);
+                $($this.data().target).modal("show", $this);
+                return false;
+                //e.preventDefault()
+            });
+        });
     .container
         .row
             .col-md-12
@@ -30,7 +53,7 @@ block content
                                             i.glyphicon.glyphicon-pencil
                                             |  Edit
                                         |  
-                                        a.btn.btn-danger(href="/projects/" + project.id + "/delete/")
+                                        a.btn.btn-danger.delete(href="/projects/" + project.id + "/delete/", data-id=project.id, data-title=project.title, data-target="#modal-delete")
                                             i.glyphicon.glyphicon-trash
                                             |  Delete
                                     td= project.title
@@ -38,3 +61,20 @@ block content
                                     td= project.dateStart.toLocaleDateString()
                                     td= project.dateFinish.toLocaleDateString()
                                     td= project.status
+    #modal-delete.modal.fade
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title
+                        | You want to delete Project '
+                        span.project-name
+                        | '. Are you sure?
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal")
+                        i.glyphicon.glyphicon-remove
+                        |  Cancel
+                    a.btn.btn-danger.remove-button(href="#", data-dismiss="modal")
+                        i.glyphicon.glyphicon-trash
+                        |  Delete
