@@ -1,42 +1,42 @@
 extends layout
 
 block content
-    .container
-        .row
-            .col-md-12
-                form.panel.panel-default(method="POST", action="./")
-                    - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
-                    .panel-heading
-                        h3.panel-title="Project " + (project.title||"")
-                    .panel-body.form-horizontal
-                        .form-group
-                            label.col-md-3 Title
-                            .col-md-9
-                                input.form-control(name="title", value=project.title||"")
-                        .form-group
-                            label.col-md-3 Description
-                            .col-md-9
-                                textarea.form-control(name="description")=project.description||""
-                        .form-group
-                            label.col-md-3 Start Date
-                            .col-md-9
-                                input.form-control(name="dateStart", value=project.dateStart.toISOString().split("T")[0], type="date")
-                        .form-group
-                            label.col-md-3 Finish Date
-                            .col-md-9
-                                input.form-control(name="dateFinish", value=project.dateFinish.toISOString().split("T")[0], type="date")
-                    .panel-footer
-                        a.btn.btn-default(href="/projects/")
-                            i.glyphicon.glyphicon-chevron-left
-                            |  Projects
-                        |  
-                        button.btn.btn-success(type="submit")
-                            i.glyphicon.glyphicon-ok
-                            |  OK
-                        |  
-                        a.btn.btn-danger(href="./")
-                            i.glyphicon.glyphicon-remove
-                            | Cancel
-                        a.btn.btn-danger.pull-right(href="./delete/")
-                            i.glyphicon.glyphicon-trash
-                            |  Delete
+  .container
+    .row
+      .col-md-12
+        form.panel.panel-default(method="POST", action="./")
+          - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
+          .panel-heading
+            h3.panel-title="Project " + (project.title||"")
+          .panel-body.form-horizontal
+            .form-group
+              label.col-md-3 Title
+              .col-md-9
+                input.form-control(name="title", value=project.title||"")
+            .form-group
+              label.col-md-3 Description
+              .col-md-9
+                textarea.form-control(name="description")=project.description||""
+            .form-group
+              label.col-md-3 Start Date
+              .col-md-9
+                input.form-control(name="dateStart", value=project.dateStart.toISOString().split("T")[0], type="date")
+            .form-group
+              label.col-md-3 Finish Date
+              .col-md-9
+                input.form-control(name="dateFinish", value=project.dateFinish.toISOString().split("T")[0], type="date")
+          .panel-footer
+            a.btn.btn-default(href="/projects/")
+              i.glyphicon.glyphicon-chevron-left
+              |  Projects
+            |  
+            button.btn.btn-success(type="submit")
+              i.glyphicon.glyphicon-ok
+              |  OK
+            |  
+            a.btn.btn-danger(href="./")
+              i.glyphicon.glyphicon-remove
+              | Cancel
+            a.btn.btn-danger.pull-right(href="./delete/")
+              i.glyphicon.glyphicon-trash
+              |  Delete

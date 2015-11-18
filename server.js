@@ -3,8 +3,10 @@ var serve = require('koa-static');
 var koaBody = require('koa-body');
 var mongoose = require('mongoose');
 var jade = new (require('koa-jade'))({viewPath:'./views/', noCache:true});
+var fs = require("fs");
 
 var config = require('./lib/config');
+require('./models/project');
 
 mongoose.connection.on('error', function(err) {
   console.log(err);
