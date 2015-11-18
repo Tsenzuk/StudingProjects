@@ -1,0 +1,27 @@
+{
+  "name": "studing-projects",
+  "description": "Just project for studing",
+  "main": "server.js",
+  "authors": [
+    "tsenzuk"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "crud"
+  ],
+  "homepage": "https://github.com/Tsenzuk/StudingProjects",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "README.md"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}

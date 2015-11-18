@@ -4,8 +4,6 @@
   "description": "Just project for studing",
   "main": "server.js",
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "jquery": "^2.1.4",
     "koa": "^1.1.1",
     "koa-jade": "^2.0.1",
     "koa-router": "^5.2.3",

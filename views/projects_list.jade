@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  script(src="/js/index.js")
+  .container
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            h3.panel-title Projects
+          table.table.table-bordered.table-hover
+            thead
+              tr
+                th #
+                th
+                  | Actions  
+                  a.btn.btn-default(href="/projects/-1/edit/")
+                    i.glyphicon.glyphicon-plus
+                    |  Add project
+                th Title
+                th Description
+                th Start Date
+                th Finish Date
+                th Status
+            tbody
+              for project, index in projects
+                tr
+                  td= index
+                  td
+                    a.btn.btn-default(href="/projects/" + project.id + "/")
+                      i.glyphicon.glyphicon-share
+                      |  View
+                    |  
+                    a.btn.btn-default(href="/projects/" + project.id + "/edit/")
+                      i.glyphicon.glyphicon-pencil
+                      |  Edit
+                    |  
+                    a.btn.btn-danger.delete(href="/projects/" + project.id + "/delete/", data-id=project.id, data-title=project.title, data-target="#modal-delete")
+                      i.glyphicon.glyphicon-trash
+                      |  Delete
+                  td= project.title
+                  td= project.description
+                  td= project.dateStart.toLocaleDateString()
+                  td= project.dateFinish.toLocaleDateString()
+                  td= project.status
+  #modal-delete.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+            span(aria-hidden="true") &times;
+          h4.modal-title
+            | You want to delete Project '
+            span.project-name
+            | '. Are you sure?
+        .modal-footer
+          button.btn.btn-default(data-dismiss="modal")
+            i.glyphicon.glyphicon-remove
+            |  Cancel
+          a.btn.btn-danger.remove-button(href="#", data-dismiss="modal")
+            i.glyphicon.glyphicon-trash
+            |  Delete

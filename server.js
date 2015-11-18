@@ -1,31 +1,28 @@
 var koa = require('koa');
 var serve = require('koa-static');
-var mongoose = require('mongoose');
-var Jade = require('koa-jade');
 var koaBody = require('koa-body');
-var jade = new Jade({
-  viewPath: './lib/views/'
-});
+var mongoose = require('mongoose');
+var jade = new (require('koa-jade'))({viewPath:'./views/', noCache:true});
+
+var config = require('./lib/config');
 
 mongoose.connection.on('error', function(err) {
   console.log(err);
 });
-mongoose.connect('mongodb://localhost/projects');
+mongoose.connect(config.db.url);
 
 var app = koa();
-var projectsRouter = require("./lib/routes/projects");
+var projectsRouter = require('./routes/projects');
 
 app.use(jade.middleware);
-app.use(koaBody({
-  formidable: {
-    uploadDir: __dirname
-  }
-}));
-app.use(serve('./node_modules/jquery/dist/'));
-app.use(serve('./node_modules/bootstrap/dist/'));
+app.use(koaBody({ formidable: { uploadDir: __dirname } }));
+app.use(serve('./public/bootstrap/dist'));
+app.use(serve('./public/jquery/dist/'));
+app.use(serve('./public/js'));
 app.use(projectsRouter.routes());
 app.use(function*() {
-  this.body = 'Hello World';
+  this.status = 404;
+  this.body = 'Page Not Found';
 });
 
 app.listen(process.env.PORT || 3000);
