@@ -20,10 +20,7 @@ projectsRouter.get('/', function*(next) {
   }
   yield next;
 }).get('/:id', function*(next) {
-  if(!this.project){
-    this.redirect('/404/');
-    return;
-  }
+  !this.project && this.throw(404);
   this.render('project_view', {
     project: this.project,
     title: this.title
@@ -34,18 +31,11 @@ projectsRouter.get('/', function*(next) {
     title: this.title
   });
 }).post('/:id/edit', function*(next) {
-  if(this.project){
-    this.project.update(this.request.body, { 'new': true});
-  } else {
-    this.project = new Project(this.request.body);
-    yield this.project.save()
-  }
+  !this.project && (this.project = new Project())
+  yield this.project.set(this.request.body).save();
   this.redirect('/projects/' + this.project.id + '/edit/');
 }).get('/:id/delete', function*(next) {
-  if(!this.project){
-    this.redirect('/404/');
-    return;
-  }
+  !this.project && this.throw(404);
   this.render('project_delete', {
     project: this.project,
     title: this.title
