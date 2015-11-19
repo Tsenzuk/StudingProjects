@@ -1,30 +1,31 @@
 extends layout
 
 block content
+  script(src="/js/index.js")
   .container
     .row
       .col-md-12
         - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
-        form.panel.panel-default(method="POST", action="./")
+        form.panel.panel-default(method="POST", action="./", data-toggle="validator")
           .panel-heading
             h3.panel-title="Project " + (project.title)
           .panel-body.form-horizontal
             .form-group
-              label.col-md-3 Title
+              label.control-label.col-md-3(for="title") Title
               .col-md-9
-                input.form-control(name="title", value=project.title)
+                input.form-control(name="title", value=project.title, required=true)
             .form-group
-              label.col-md-3 Description
+              label.control-label.col-md-3(for="description") Description
               .col-md-9
                 textarea.form-control(name="description")=project.description
             .form-group
-              label.col-md-3 Start Date
+              label.control-label.col-md-3(for="dateStart") Start Date
               .col-md-9
                 input.form-control(name="dateStart", value=project.dateStart.toISOString().split("T")[0], type="date")
             .form-group
-              label.col-md-3 Finish Date
+              label.control-label.col-md-3(for="dateFinish") Finish Date
               .col-md-9
-                input.form-control(name="dateFinish", value=project.dateFinish.toISOString().split("T")[0], type="date")
+                input.form-control(name="dateFinish", value=project.dateFinish.toISOString().split("T")[0], type="date", min=project.dateStart.toISOString().split("T")[0])
           .panel-footer
             a.btn.btn-default(href="/projects/")
               i.glyphicon.glyphicon-chevron-left
