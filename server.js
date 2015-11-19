@@ -9,7 +9,8 @@ app.use(jade.middleware);
 app.use(koaBody({ formidable: { uploadDir: __dirname } }));
 app.use(serve('./public'));
 
-app.use(require('./lib/mongo.js')());
+app.use(require('./lib/config.js')(app));
+app.use(require('./lib/mongo.js')(app));
 app.use(require('./lib/routes.js')());
 
 app.use(function*() {
