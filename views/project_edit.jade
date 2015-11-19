@@ -4,19 +4,19 @@ block content
   .container
     .row
       .col-md-12
+        - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
         form.panel.panel-default(method="POST", action="./")
-          - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
           .panel-heading
-            h3.panel-title="Project " + (project.title||"")
+            h3.panel-title="Project " + (project.title)
           .panel-body.form-horizontal
             .form-group
               label.col-md-3 Title
               .col-md-9
-                input.form-control(name="title", value=project.title||"")
+                input.form-control(name="title", value=project.title)
             .form-group
               label.col-md-3 Description
               .col-md-9
-                textarea.form-control(name="description")=project.description||""
+                textarea.form-control(name="description")=project.description
             .form-group
               label.col-md-3 Start Date
               .col-md-9
@@ -37,6 +37,6 @@ block content
             a.btn.btn-danger(href="./")
               i.glyphicon.glyphicon-remove
               | Cancel
-            a.btn.btn-danger.pull-right(href="./delete/")
+            a.btn.btn-danger.pull-right(href="./delete/", class=(project.title!="")?"":"hidden")
               i.glyphicon.glyphicon-trash
               |  Delete

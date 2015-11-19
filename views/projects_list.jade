@@ -12,25 +12,27 @@ block content
             thead
               tr
                 th #
-                th
-                  | Actions  
-                  a.btn.btn-default(href="/projects/-1/edit/")
-                    i.glyphicon.glyphicon-plus
-                    |  Add project
                 th Title
                 th Description
                 th Start Date
                 th Finish Date
                 th Status
+                th
+                  | Actions  
+                  a.btn.btn-default(href="/projects/add/")
+                    i.glyphicon.glyphicon-plus
+                    |  Add project
             tbody
               for project, index in projects
                 tr
                   td= index
                   td
-                    a.btn.btn-default(href="/projects/" + project.id + "/")
-                      i.glyphicon.glyphicon-share
-                      |  View
-                    |  
+                    a(href="/projects/" + project.id + "/")= project.title
+                  td= project.description
+                  td= project.dateStart.toDateString()
+                  td= project.dateFinish.toDateString()
+                  td= project.status
+                  td
                     a.btn.btn-default(href="/projects/" + project.id + "/edit/")
                       i.glyphicon.glyphicon-pencil
                       |  Edit
@@ -38,11 +40,6 @@ block content
                     a.btn.btn-danger.delete(href="/projects/" + project.id + "/delete/", data-id=project.id, data-title=project.title, data-target="#modal-delete")
                       i.glyphicon.glyphicon-trash
                       |  Delete
-                  td= project.title
-                  td= project.description
-                  td= project.dateStart.toLocaleDateString()
-                  td= project.dateFinish.toLocaleDateString()
-                  td= project.status
   #modal-delete.modal.fade
     .modal-dialog
       .modal-content

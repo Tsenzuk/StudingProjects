@@ -18,9 +18,7 @@ var projectsRouter = require('./routes/projects');
 
 app.use(jade.middleware);
 app.use(koaBody({ formidable: { uploadDir: __dirname } }));
-app.use(serve('./public/bootstrap/dist'));
-app.use(serve('./public/jquery/dist/'));
-app.use(serve('./public/js'));
+app.use(serve('./public'));
 app.use(projectsRouter.routes());
 app.use(function*() {
   this.status = 404;

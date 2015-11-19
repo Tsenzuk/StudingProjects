@@ -12,13 +12,22 @@ projectsRouter.get('/', function*(next) {
     title: 'Projects'
   });
 }).param('id',function*(id, next){
-  try{
+  //try{
     this.project = yield Project.findOne({ _id: id });
     this.title = 'Project' + this.params.id;
-  }catch(e){
+  /*}catch(e){
     this.title = 'New Project';
-  }
+  }*/
   yield next;
+}).get('/add/', function*(next) {
+  this.render('project_edit', {
+    project: undefined,
+    title: 'New Project'
+  });
+}).post('/add', function*(next) {
+  this.project = new Project()
+  yield this.project.set(this.request.body).save();
+  this.redirect('/projects/' + this.project.id + '/edit/');
 }).get('/:id', function*(next) {
   !this.project && this.throw(404);
   this.render('project_view', {
@@ -31,7 +40,7 @@ projectsRouter.get('/', function*(next) {
     title: this.title
   });
 }).post('/:id/edit', function*(next) {
-  !this.project && (this.project = new Project())
+  !this.project && this.throw(404);
   yield this.project.set(this.request.body).save();
   this.redirect('/projects/' + this.project.id + '/edit/');
 }).get('/:id/delete', function*(next) {
@@ -41,9 +50,8 @@ projectsRouter.get('/', function*(next) {
     title: this.title
   });
 }).post('/:id/delete', function*(next) {
-  if(this.project){
-    yield this.project.remove();
-  }
+  !this.project && this.throw(404);
+  yield this.project.remove();
   this.redirect('/projects/');
 });
 
