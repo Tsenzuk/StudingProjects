@@ -13,11 +13,11 @@ block content
             .form-group
               label.control-label.col-md-3(for="title") Title
               .col-md-9
-                input.form-control(name="title", value=project.title, required=true)
+                input.form-control(name="title", placeholder="Project title", value=project.title, required=true)
             .form-group
               label.control-label.col-md-3(for="description") Description
               .col-md-9
-                textarea.form-control(name="description")=project.description
+                textarea.form-control(name="description", placeholder="Some short project description")=project.description
             .form-group
               label.control-label.col-md-3(for="dateStart") Start Date
               .col-md-9
@@ -38,6 +38,6 @@ block content
             a.btn.btn-danger(href="./")
               i.glyphicon.glyphicon-remove
               | Cancel
-            a.btn.btn-danger.pull-right(href="./delete/", class=(project.title!="")?"":"hidden")
+            a.btn.btn-danger.pull-right(href="../delete/", class=(project.title!="")?"":"hidden")
               i.glyphicon.glyphicon-trash
               |  Delete
