@@ -1,5 +1,6 @@
 var Router = require('koa-router');
-var Project = require("mongoose").model("Project");
+var mongoose = require('mongoose')
+var Project = mongoose.model("Project");
 
 var projectsRouter = new Router({
   prefix: '/projects'
@@ -12,12 +13,9 @@ projectsRouter.get('/', function*(next) {
     title: 'Projects'
   });
 }).param('id',function*(id, next){
-  //try{
-    this.project = yield Project.findOne({ _id: id });
-    this.title = 'Project' + this.params.id;
-  /*}catch(e){
-    this.title = 'New Project';
-  }*/
+  !mongoose.Types.ObjectId.isValid(id) && this.throw(404);
+  this.project = yield Project.findOne({ _id: id });
+  this.title = 'Project' + this.params.id;
   yield next;
 }).get('/add/', function*(next) {
   this.render('project_edit', {

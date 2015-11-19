@@ -19,12 +19,9 @@ jQuery(function($){
     return false;
   });
   
-  var $startDate = $('input[name="dateStart"]').change(function () {
+  var $finishDate = $('input[name="dateFinish"]');
+  $('input[name="dateStart"]').change(function () {
     var $this = $(this);
     $finishDate.attr("min",$this.val()).change();
   });
-  var $finishDate = $('input[name="dateFinish"]')/*.change(function () {
-    var $this = $(this);
-    $startDate.attr("max",$this.val());
-  });*/
 });
