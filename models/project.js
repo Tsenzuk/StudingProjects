@@ -1,3 +1,4 @@
+var async = require('async');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var STATUSES = ['started','finished','in progress'];
@@ -27,7 +28,7 @@ projectSchema.virtual('status').get(function(){
 	  this._status = STATUSES[1];
 	}
 	
-	setTimeout(this.save.bind(this),0);
+	async.parallel([this.save]);
 	
 	return this._status;
 });
