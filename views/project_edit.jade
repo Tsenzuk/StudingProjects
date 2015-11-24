@@ -5,12 +5,24 @@ block content
   .container
     .row
       .col-md-12
+        -errors = errors || []
+        -foundErrors = []
+        for error in errors
+          for message, name in error
+            -foundErrors.push(name)
+            .alert.alert-danger
+              button.close(type="button", data-dismiss="alert", aria-label="Close")
+                span(aria-hidden="true") &times;
+              strong= name
+              |  
+              span= message
+      .col-md-12
         - project = project||{title:"",description:"",dateStart:new Date(),dateFinish:new Date()}
         form.panel.panel-default(method="POST", action="./", data-toggle="validator")
           .panel-heading
             h3.panel-title="Project " + (project.title)
           .panel-body.form-horizontal
-            .form-group
+            .form-group(class={"has-error":!!~foundErrors.indexOf("title")})
               label.control-label.col-md-3(for="title") Title
               .col-md-9
                 input.form-control(name="title", placeholder="Project title", value=project.title, required=true)
@@ -22,7 +34,7 @@ block content
               label.control-label.col-md-3(for="dateStart") Start Date
               .col-md-9
                 input.form-control(name="dateStart", value=project.dateStart.toISOString().split("T")[0], type="date")
-            .form-group
+            .form-group(class={"has-error":!!~foundErrors.indexOf("dateFinish")})
               label.control-label.col-md-3(for="dateFinish") Finish Date
               .col-md-9
                 input.form-control(name="dateFinish", value=project.dateFinish.toISOString().split("T")[0], type="date", min=project.dateStart.toISOString().split("T")[0])

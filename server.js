@@ -5,6 +5,7 @@ var jade = new (require('koa-jade'))({viewPath:'./views/', noCache:true});
 
 var app = koa();
 
+app.use(require('koa-validate')());
 app.use(jade.middleware);
 app.use(koaBody({ formidable: { uploadDir: __dirname } }));
 app.use(serve('./public'));
